@@ -160,5 +160,12 @@ public class RichEditorToolbar: UIView {
         toolbar.frame.size.height = 44
         toolbarScroll.contentSize.width = width
     }
-    
+}
+
+// MARK: PlayerAid extensions
+
+extension RichEditorToolbar {
+    public func setToolbarBackgroundColor(color: UIColor) {
+        toolbarScroll.backgroundColor = color
+    }
 }

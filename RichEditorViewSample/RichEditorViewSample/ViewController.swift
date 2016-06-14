@@ -9,6 +9,14 @@
 import UIKit
 import RichEditorView
 
+extension RichEditorOptions {
+    public static func playerAidOptions() -> [RichEditorOption] {
+        return [
+            Bold, Header(1), Header(2), OrderedList, UnorderedList, // <HR>
+        ]
+    }
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet var editorView: RichEditorView!
@@ -16,7 +24,8 @@ class ViewController: UIViewController {
 
     lazy var toolbar: RichEditorToolbar = {
         let toolbar = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
-        toolbar.options = RichEditorOptions.all()
+        toolbar.options = RichEditorOptions.playerAidOptions()
+        toolbar.setToolbarBackgroundColor(UIColor.whiteColor())
         return toolbar
     }()
 
@@ -26,17 +35,7 @@ class ViewController: UIViewController {
         editorView.delegate = self
         editorView.inputAccessoryView = toolbar
 
-        toolbar.delegate = self
         toolbar.editor = editorView
-
-        // We will create a custom action that clears all the input text when it is pressed
-        let item = RichEditorOptionItem(image: nil, title: "Clear") { toolbar in
-            toolbar?.editor?.setHTML("")
-        }
-
-        var options = toolbar.options
-        options.append(item)
-        toolbar.options = options
     }
 
 }
@@ -63,42 +62,4 @@ extension ViewController: RichEditorDelegate {
 
     func richEditor(editor: RichEditorView, handleCustomAction content: String) { }
     
-}
-
-extension ViewController: RichEditorToolbarDelegate {
-
-    private func randomColor() -> UIColor {
-        let colors = [
-            UIColor.redColor(),
-            UIColor.orangeColor(),
-            UIColor.yellowColor(),
-            UIColor.greenColor(),
-            UIColor.blueColor(),
-            UIColor.purpleColor()
-        ]
-
-        let color = colors[Int(arc4random_uniform(UInt32(colors.count)))]
-        return color
-    }
-
-    func richEditorToolbarChangeTextColor(toolbar: RichEditorToolbar) {
-        let color = randomColor()
-        toolbar.editor?.setTextColor(color)
-    }
-
-    func richEditorToolbarChangeBackgroundColor(toolbar: RichEditorToolbar) {
-        let color = randomColor()
-        toolbar.editor?.setTextBackgroundColor(color)
-    }
-
-    func richEditorToolbarInsertImage(toolbar: RichEditorToolbar) {
-        toolbar.editor?.insertImage("https://gravatar.com/avatar/696cf5da599733261059de06c4d1fe22", alt: "Gravatar")
-    }
-
-    func richEditorToolbarInsertLink(toolbar: RichEditorToolbar) {
-        // Can only add links to selected text, so make sure there is a range selection first
-        if let hasSelection = toolbar.editor?.rangeSelectionExists() where hasSelection {
-            toolbar.editor?.insertLink("http://github.com/cjwirth/RichEditorView", title: "Github Link")
-        }
-    }
 }
