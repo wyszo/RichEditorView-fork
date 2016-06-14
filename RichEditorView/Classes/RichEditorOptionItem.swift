@@ -122,7 +122,7 @@ public enum RichEditorOptions: RichEditorOption {
         case .Clear: name = "clear"
         case .Undo: name = "undo"
         case .Redo: name = "redo"
-        case .Bold: name = "bold"
+        case .Bold: name = "body-ic-off"
         case .Italic: name = "italic"
         case .Subscript: name = "subscript"
         case .Superscript: name = "superscript"
@@ -130,11 +130,18 @@ public enum RichEditorOptions: RichEditorOption {
         case .Underline: name = "underline"
         case .TextColor: name = "text_color"
         case .TextBackgroundColor: name = "bg_color"
-        case .Header(let h): name = "h\(h)"
+        case .Header(let h):
+            if h == 1 {
+                name = "title-ic-off"
+            } else if h == 2 {
+                name = "subtitle-ic-off"
+            } else {
+                name = "h\(h)"
+            }
         case .Indent: name = "indent"
         case .Outdent: name = "outdent"
-        case .OrderedList: name = "ordered_list"
-        case .UnorderedList: name = "unordered_list"
+        case .OrderedList: name = "number-ic-off"
+        case .UnorderedList: name = "bullet-ic-off"
         case .AlignLeft: name = "justify_left"
         case .AlignCenter: name = "justify_center"
         case .AlignRight: name = "justify_right"

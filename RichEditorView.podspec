@@ -14,6 +14,16 @@ Pod::Spec.new do |s|
   s.source_files = 'RichEditorView/Classes/*'
   s.resources = [
       'RichEditorView/Assets/icons/*',
-      'RichEditorView/Assets/editor/*'
+      'RichEditorView/Assets/editor/*',
+      'RichEditorView/playeraid-icons.xcassets/*',
+      'RichEditorView/Assets/PlayerAid/*'
     ]
+  s.resource_bundles = {
+    'Assets' => [
+      'RichEditorView/Assets/icons/*',
+      'RichEditorView/Assets/editor/*',
+      'RichEditorView/playeraid-icons.xcassets/*',
+      'RichEditorView/Assets/PlayerAid/*'
+    ]
+  }
 end

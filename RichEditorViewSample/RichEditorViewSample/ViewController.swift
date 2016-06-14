@@ -26,6 +26,10 @@ class ViewController: UIViewController {
         let toolbar = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
         toolbar.options = RichEditorOptions.playerAidOptions()
         toolbar.setToolbarBackgroundColor(UIColor.whiteColor())
+
+        let toolbarGrayColor = UIColor(colorLiteralRed: 226.0/255.0, green: 226.0/255.0, blue: 226.0/255.0, alpha: 1.0)
+        toolbar.setToolbarBorderColor(toolbarGrayColor)
+        toolbar.setBorderSize(0.5)
         return toolbar
     }()
 

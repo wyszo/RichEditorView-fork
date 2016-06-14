@@ -168,4 +168,15 @@ extension RichEditorToolbar {
     public func setToolbarBackgroundColor(color: UIColor) {
         toolbarScroll.backgroundColor = color
     }
+    
+    public func setToolbarBorderColor(color: UIColor) {
+        backgroundToolbar.barTintColor = color
+    }
+    
+    public func setBorderSize(size: CGFloat) {
+        var frame = self.bounds
+        frame.origin.y = frame.origin.y + size
+        frame.size.height = frame.size.height - size
+        toolbarScroll.frame = frame
+    }
 }
